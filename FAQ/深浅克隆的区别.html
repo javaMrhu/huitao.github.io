@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>深拷贝和浅拷贝的区别 | 大涛的技术博客</title>
+    <meta name="generator" content="VuePress 1.6.0">
+    <link rel="icon" href="/img/icon.png">
+    <meta name="description" content="灵魂在游走，程序在奔跑">
+    <link rel="preload" href="/assets/css/0.styles.5f2009bf.css" as="style"><link rel="preload" href="/assets/js/app.eb76caeb.js" as="script"><link rel="preload" href="/assets/js/2.6a0604cb.js" as="script"><link rel="preload" href="/assets/js/26.3a036e10.js" as="script"><link rel="prefetch" href="/assets/js/10.5a189c45.js"><link rel="prefetch" href="/assets/js/11.b6f67aa1.js"><link rel="prefetch" href="/assets/js/12.af74c531.js"><link rel="prefetch" href="/assets/js/13.9f296a2d.js"><link rel="prefetch" href="/assets/js/14.fc9427a9.js"><link rel="prefetch" href="/assets/js/15.4056d830.js"><link rel="prefetch" href="/assets/js/16.5008d3a3.js"><link rel="prefetch" href="/assets/js/17.7cb2ddb9.js"><link rel="prefetch" href="/assets/js/18.a6868015.js"><link rel="prefetch" href="/assets/js/19.d97a5270.js"><link rel="prefetch" href="/assets/js/20.1f6785e6.js"><link rel="prefetch" href="/assets/js/21.851e0b1b.js"><link rel="prefetch" href="/assets/js/22.ccb45917.js"><link rel="prefetch" href="/assets/js/23.0d87293a.js"><link rel="prefetch" href="/assets/js/24.64dc2037.js"><link rel="prefetch" href="/assets/js/25.c57a679c.js"><link rel="prefetch" href="/assets/js/27.c9074a60.js"><link rel="prefetch" href="/assets/js/28.3d6ac3ea.js"><link rel="prefetch" href="/assets/js/29.dba4ed64.js"><link rel="prefetch" href="/assets/js/3.db49143d.js"><link rel="prefetch" href="/assets/js/30.6ee4d757.js"><link rel="prefetch" href="/assets/js/31.a5b18432.js"><link rel="prefetch" href="/assets/js/32.5ea3fb25.js"><link rel="prefetch" href="/assets/js/4.25ae02ee.js"><link rel="prefetch" href="/assets/js/5.3ae106b1.js"><link rel="prefetch" href="/assets/js/6.1bcce3c2.js"><link rel="prefetch" href="/assets/js/7.a8968cb5.js"><link rel="prefetch" href="/assets/js/8.caaa30e7.js"><link rel="prefetch" href="/assets/js/9.98c6866e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.5f2009bf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><main><!----> <div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">大涛的技术博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Life/" class="nav-link">
+  Life
+</a></div><div class="nav-item"><a href="/FAQ/" class="nav-link router-link-active">
+  求索
+</a></div><div class="nav-item"><a href="/Grow/" class="nav-link">
+  成长
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/qq_43672652" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://juejin.im/user/272334615478478" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  掘金
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://itdatao.github.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Life/" class="nav-link">
+  Life
+</a></div><div class="nav-item"><a href="/FAQ/" class="nav-link router-link-active">
+  求索
+</a></div><div class="nav-item"><a href="/Grow/" class="nav-link">
+  成长
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/qq_43672652" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://juejin.im/user/272334615478478" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  掘金
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://itdatao.github.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design Pattern</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>FAQ</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FAQ/" aria-current="page" class="sidebar-link">常见的面试题</a></li><li><a href="/FAQ/Docker.html" class="sidebar-link">Docker 是什么？它有什么优点？</a></li><li><a href="/FAQ/JDK和CGlib.html" class="sidebar-link">动态代理的实现方式？以及他们之间的区别</a></li><li><a href="/FAQ/MQ.html" class="sidebar-link">MQ的使用场景</a></li><li><a href="/FAQ/MyBatis.html" class="sidebar-link">Mybatis中用到了那些设计模式</a></li><li><a href="/FAQ/Nginx.html" class="sidebar-link">Nginx</a></li><li><a href="/FAQ/Spring.html" class="sidebar-link">Spring的执行流程和核心功能</a></li><li><a href="/FAQ/SpringBoot的优点.html" class="sidebar-link">SpringBoot的优点</a></li><li><a href="/FAQ/TCP.html" class="sidebar-link">TCP为什么要进行三次握手</a></li><li><a href="/FAQ/深浅克隆的区别.html" class="active sidebar-link">深拷贝和浅拷贝的区别</a></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading"><span>Java集合</span> <span class="arrow right"></span></p> <!----></section></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Grow</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Java并发</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Life</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Spring</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="深拷贝和浅拷贝的区别"><a href="#深拷贝和浅拷贝的区别" class="header-anchor">#</a> 深拷贝和浅拷贝的区别</h1> <p>使用克隆可以为我们快速地构建出一个已有对象的副本，它属于 Java 基础的一部分，也是面试中常被问到的知识点之一。</p> <p>我们本课时的面试题是，什么是浅克隆和深克隆？如何实现克隆？</p> <p>典型回答
+浅克隆（Shadow Clone）是把原型对象中成员变量为值类型的属性都复制给克隆对象，把原型对象中成员变量为引用类型的引用地址也复制给克隆对象，也就是原型对象中如果有成员变量为引用对象，则此引用对象的地址是共享给原型对象和克隆对象的。</p> <p>简单来说就是浅克隆只会复制原型对象，但不会复制它所引用的对象，如下图所示：</p> <p><img src="F:%5CTyper%E7%AC%94%E8%AE%B0%5C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%5C%E9%9D%A2%E8%AF%95%E9%A2%98%5CCiqah16EEHqAS-yBAACmrlSP9OU378.png" alt="img"></p> <p>深克隆（Deep Clone）是将原型对象中的所有类型，无论是值类型还是引用类型，都复制一份给克隆对象，也就是说深克隆会把原型对象和原型对象所引用的对象，都复制一份给克隆对象，如下图所示：</p> <p><img src="F:%5CTyper%E7%AC%94%E8%AE%B0%5C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%5C%E9%9D%A2%E8%AF%95%E9%A2%98%5CCiqah16EEHqACOHEAAB2WjY2QEQ611.png" alt="img"></p> <p>在 Java 语言中要实现克隆则需要实现 Cloneable 接口，并重写 Object 类中的 clone() 方法，实现代码如下：</p> <p>复制</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CloneExample</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">CloneNotSupportedException</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 创建被赋值对象</span>
+        <span class="token class-name">People</span> p1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">People</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        p1<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        p1<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span><span class="token string">&quot;Java&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 克隆 p1 对象</span>
+        <span class="token class-name">People</span> p2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">People</span><span class="token punctuation">)</span> p1<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 打印名称</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;p2:&quot;</span> <span class="token operator">+</span> p2<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">People</span> <span class="token keyword">implements</span> <span class="token class-name">Cloneable</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 属性</span>
+        <span class="token keyword">private</span> <span class="token class-name">Integer</span> id<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+        <span class="token comment">/**
+         * 重写 clone 方法
+         * @throws CloneNotSupportedException
+         */</span>
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">protected</span> <span class="token class-name">Object</span> <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">CloneNotSupportedException</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token class-name">Integer</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> id<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br></div></div><p>以上程序执行的结果为：</p> <p>以上程序执行的结果为：</p> <p>复制
+p2:Java
+考点分析
+克隆相关的面试题不算太难，但因为使用频率不高，因此很容易被人忽略，面试官通常会在一面或者二面的时候问到此知识点，和它相关的面试题还有以下这些：</p> <p>在 java.lang.Object 中对 clone() 方法的约定有哪些？</p> <p>Arrays.copyOf() 是深克隆还是浅克隆？</p> <p>深克隆的实现方式有几种？</p> <p>Java 中的克隆为什么要设计成，既要实现空接口 Cloneable，还要重写 Object 的 clone() 方法？</p> <p>知识扩展
+clone() 源码分析
+要想真正的了解克隆，首先要从它的源码入手，代码如下：</p> <p>复制</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+
+ * Creates and returns a copy of this object.  The precise meaning
+
+ * of &quot;copy&quot; may depend on the class of the object. The general
+
+ * intent is that, for any object {@code x}, the expression:
+
+ * &lt;blockquote&gt;
+
+ * &lt;pre&gt;
+
+ * x.clone() != x&lt;/pre&gt;&lt;/blockquote&gt;
+
+ * will be true, and that the expression:
+
+ * &lt;blockquote&gt;
+
+ * &lt;pre&gt;
+
+ * x.clone().getClass() == x.getClass()&lt;/pre&gt;&lt;/blockquote&gt;
+
+ * will be {@code true}, but these are not absolute requirements.
+
+ * While it is typically the case that:
+
+ * &lt;blockquote&gt;
+
+ * &lt;pre&gt;
+
+ * x.clone().equals(x)&lt;/pre&gt;&lt;/blockquote&gt;
+
+ * will be {@code true}, this is not an absolute requirement.
+
+ * &lt;p&gt;
+
+ * By convention, the returned object should be obtained by calling
+
+ * {@code super.clone}.  If a class and all of its superclasses (except
+
+ * {@code Object}) obey this convention, it will be the case that
+
+ * {@code x.clone().getClass() == x.getClass()}.
+
+ * &lt;p&gt;
+
+ * By convention, the object returned by this method should be independent
+
+ * of this object (which is being cloned).  To achieve this independence,
+
+ * it may be necessary to modify one or more fields of the object returned
+
+ * by {@code super.clone} before returning it.  Typically, this means
+
+ * copying any mutable objects that comprise the internal &quot;deep structure&quot;
+
+ * of the object being cloned and replacing the references to these
+
+ * objects with references to the copies.  If a class contains only
+
+ * primitive fields or references to immutable objects, then it is usually
+
+ * the case that no fields in the object returned by {@code super.clone}
+
+ * need to be modified.
+
+ * &lt;p&gt;
+
+ * ......
+   */</span>
+   <span class="token keyword">protected</span> <span class="token keyword">native</span> <span class="token class-name">Object</span> <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">CloneNotSupportedException</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br></div></div><p>从以上源码的注释信息中我们可以看出，Object 对 clone() 方法的约定有三条：</p> <p>从以上源码的注释信息中我们可以看出，Object 对 clone() 方法的约定有三条：</p> <p>对于所有对象来说，x.clone() !=x 应当返回 true，因为克隆对象与原对象不是同一个对象；</p> <p>对于所有对象来说，x.clone().getClass() == x.getClass() 应当返回 true，因为克隆对象与原对象的类型是一样的；</p> <p>对于所有对象来说，x.clone().equals(x) 应当返回 true，因为使用 equals 比较时，它们的值都是相同的。</p> <p>除了注释信息外，我们看 clone() 的实现方法，发现 clone() 是使用 native 修饰的本地方法，因此执行的性能会很高，并且它返回的类型为 Object，因此在调用克隆之后要把对象强转为目标类型才行。</p> <p>Arrays.copyOf()
+如果是数组类型，我们可以直接使用 Arrays.copyOf() 来实现克隆，实现代码如下：</p> <p>复制</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token class-name">People</span><span class="token punctuation">[</span><span class="token punctuation">]</span> o1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token keyword">new</span> <span class="token class-name">People</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&quot;Java&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token class-name">People</span><span class="token punctuation">[</span><span class="token punctuation">]</span> o2 <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>o1<span class="token punctuation">,</span> o1<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 修改原型对象的第一个元素的值</span>
+o1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span><span class="token string">&quot;Jdk&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;o1:&quot;</span> <span class="token operator">+</span> o1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;o2:&quot;</span> <span class="token operator">+</span> o2<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>以上程序的执行结果为：</p> <p>以上程序的执行结果为：</p> <p>复制
+o1:Jdk
+o2:Jdk
+从结果可以看出，我们在修改克隆对象的第一个元素之后，原型对象的第一个元素也跟着被修改了，这说明 Arrays.copyOf() 其实是一个浅克隆。</p> <p>因为数组比较特殊数组本身就是引用类型，因此在使用 Arrays.copyOf() 其实只是把引用地址复制了一份给克隆对象，如果修改了它的引用对象，那么指向它的（引用地址）所有对象都会发生改变，因此看到的结果是，修改了克隆对象的第一个元素，原型对象也跟着被修改了。</p> <p>深克隆实现方式汇总
+深克隆的实现方式有很多种，大体可以分为以下几类：</p> <p>所有对象都实现克隆方法；</p> <p>通过构造方法实现深克隆；</p> <p>使用 JDK 自带的字节流实现深克隆；</p> <p>使用第三方工具实现深克隆，比如 Apache Commons Lang；</p> <p>使用 JSON 工具类实现深克隆，比如 Gson、FastJSON 等。</p> <p>接下来我们分别来实现以上这些方式，在开始之前先定义一个公共的用户类，代码如下：</p> <p>复制</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+
+ * 用户类
+   */</span>
+   <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">People</span> <span class="token punctuation">{</span>
+   <span class="token keyword">private</span> <span class="token class-name">Integer</span> id<span class="token punctuation">;</span>
+   <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+   <span class="token keyword">private</span> <span class="token class-name">Address</span> address<span class="token punctuation">;</span> <span class="token comment">// 包含 Address 引用对象</span>
+   <span class="token comment">// 忽略构造方法、set、get 方法</span>
+   <span class="token punctuation">}</span>
+   <span class="token comment">/**
+ * 地址类
+   */</span>
+   <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Address</span> <span class="token punctuation">{</span>
+   <span class="token keyword">private</span> <span class="token class-name">Integer</span> id<span class="token punctuation">;</span>
+   <span class="token keyword">private</span> <span class="token class-name">String</span> city<span class="token punctuation">;</span>
+   <span class="token comment">// 忽略构造方法、set、get 方法</span>
+   <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>可以看出在 People 对象中包含了一个引用对象 Address。</p> <p>可以看出在 People 对象中包含了一个引用对象 Address。</p> <p>1.所有对象都实现克隆</p> <p>这种方式我们需要修改 People 和 Address 类，让它们都实现 Cloneable 的接口，让所有的引用对象都实现克隆，从而实现 People 类的深克隆，代码如下：</p> <p>复制
+public class CloneExample {
+public static void main(String[] args) throws CloneNotSupportedException {
+// 创建被赋值对象
+Address address = new Address(110, &quot;北京&quot;);
+People p1 = new People(1, &quot;Java&quot;, address);
+// 克隆 p1 对象
+People p2 = p1.clone();
+// 修改原型对象
+p1.getAddress().setCity(&quot;西安&quot;);
+// 输出 p1 和 p2 地址信息
+System.out.println(&quot;p1:&quot; + p1.getAddress().getCity() +
+&quot; p2:&quot; + p2.getAddress().getCity());
+}
+/**
+* 用户类
+<em>/
+static class People implements Cloneable {
+private Integer id;
+private String name;
+private Address address;
+/</em>*
+* 重写 clone 方法
+* @throws CloneNotSupportedException
+<em>/
+@Override
+protected People clone() throws CloneNotSupportedException {
+People people = (People) super.clone();
+people.setAddress(this.address.clone()); // 引用类型克隆赋值
+return people;
+}
+// 忽略构造方法、set、get 方法
+}
+/</em>*
+* 地址类
+<em>/
+static class Address implements Cloneable {
+private Integer id;
+private String city;
+/</em>*
+* 重写 clone 方法
+* @throws CloneNotSupportedException
+*/
+@Override
+protected Address clone() throws CloneNotSupportedException {
+return (Address) super.clone();
+}
+// 忽略构造方法、set、get 方法
+}
+}
+以上程序的执行结果为：</p> <p>复制
+p1:西安 p2:北京
+从结果可以看出，当我们修改了原型对象的引用属性之后，并没有影响克隆对象，这说明此对象已经实现了深克隆。</p> <p>2.通过构造方法实现深克隆</p> <p>《Effective Java》 中推荐使用构造器（Copy Constructor）来实现深克隆，如果构造器的参数为基本数据类型或字符串类型则直接赋值，如果是对象类型，则需要重新 new 一个对象，实现代码如下：</p> <p>复制
+public class SecondExample {
+public static void main(String[] args) throws CloneNotSupportedException {
+// 创建对象
+Address address = new Address(110, &quot;北京&quot;);
+People p1 = new People(1, &quot;Java&quot;, address);</p> <div class="language- extra-class"><pre><code>    // 调用构造函数克隆对象
+    People p2 = new People(p1.getId(), p1.getName(),
+            new Address(p1.getAddress().getId(), p1.getAddress().getCity()));
+
+    // 修改原型对象
+    p1.getAddress().setCity(&quot;西安&quot;);
+
+    // 输出 p1 和 p2 地址信息
+    System.out.println(&quot;p1:&quot; + p1.getAddress().getCity() +
+            &quot; p2:&quot; + p2.getAddress().getCity());
+}
+
+/**
+ * 用户类
+ */
+static class People {
+    private Integer id;
+    private String name;
+    private Address address;
+    // 忽略构造方法、set、get 方法
+}
+
+/**
+ * 地址类
+ */
+static class Address {
+    private Integer id;
+    private String city;
+    // 忽略构造方法、set、get 方法
+}
+</code></pre></div><p>}
+以上程序的执行结果为：</p> <p>复制
+p1:西安 p2:北京
+从结果可以看出，当我们修改了原型对象的引用属性之后，并没有影响克隆对象，这说明此对象已经实现了深克隆。</p> <p>3.通过字节流实现深克隆</p> <p>通过 JDK 自带的字节流实现深克隆的方式，是先将要原型对象写入到内存中的字节流，然后再从这个字节流中读出刚刚存储的信息，来作为一个新的对象返回，那么这个新对象和原型对象就不存在任何地址上的共享，这样就实现了深克隆，代码如下：</p> <p>复制
+import java.io.*;</p> <p>public class ThirdExample {
+public static void main(String[] args) throws CloneNotSupportedException {
+// 创建对象
+Address address = new Address(110, &quot;北京&quot;);
+People p1 = new People(1, &quot;Java&quot;, address);</p> <div class="language- extra-class"><pre><code>    // 通过字节流实现克隆
+    People p2 = (People) StreamClone.clone(p1);
+
+    // 修改原型对象
+    p1.getAddress().setCity(&quot;西安&quot;);
+
+    // 输出 p1 和 p2 地址信息
+    System.out.println(&quot;p1:&quot; + p1.getAddress().getCity() +
+            &quot; p2:&quot; + p2.getAddress().getCity());
+}
+
+/**
+ * 通过字节流实现克隆
+ */
+static class StreamClone {
+    public static &lt;T extends Serializable&gt; T clone(People obj) {
+        T cloneObj = null;
+        try {
+            // 写入字节流
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(bo);
+            oos.writeObject(obj);
+            oos.close();
+            // 分配内存,写入原始对象,生成新对象
+            ByteArrayInputStream bi = new ByteArrayInputStream(bo.toByteArray());//获取上面的输出字节流
+            ObjectInputStream oi = new ObjectInputStream(bi);
+            // 返回生成的新对象
+            cloneObj = (T) oi.readObject();
+            oi.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cloneObj;
+    }
+}
+
+/**
+ * 用户类
+ */
+static class People implements Serializable {
+    private Integer id;
+    private String name;
+    private Address address;
+    // 忽略构造方法、set、get 方法
+}
+
+/**
+ * 地址类
+ */
+static class Address implements Serializable {
+    private Integer id;
+    private String city;
+    // 忽略构造方法、set、get 方法
+}
+</code></pre></div><p>}
+以上程序的执行结果为：</p> <p>复制
+p1:西安 p2:北京
+此方式需要注意的是，由于是通过字节流序列化实现的深克隆，因此每个对象必须能被序列化，必须实现 Serializable 接口，标识自己可以被序列化，否则会抛出异常 (java.io.NotSerializableException)。</p> <p>4.通过第三方工具实现深克隆</p> <p>本课时使用 Apache Commons Lang 来实现深克隆，实现代码如下：</p> <p>复制
+import org.apache.commons.lang3.SerializationUtils;</p> <p>import java.io.Serializable;</p> <p>/**</p> <ul><li><p>深克隆实现方式四：通过 apache.commons.lang 实现
+*/
+public class FourthExample {
+public static void main(String[] args) throws CloneNotSupportedException {
+// 创建对象
+Address address = new Address(110, &quot;北京&quot;);
+People p1 = new People(1, &quot;Java&quot;, address);</p> <div class="language- extra-class"><pre><code> // 调用 apache.commons.lang 克隆对象
+ People p2 = (People) SerializationUtils.clone(p1);
+
+ // 修改原型对象
+ p1.getAddress().setCity(&quot;西安&quot;);
+
+ // 输出 p1 和 p2 地址信息
+ System.out.println(&quot;p1:&quot; + p1.getAddress().getCity() +
+         &quot; p2:&quot; + p2.getAddress().getCity());
+</code></pre></div><p>}</p> <p>/**</p> <ul><li>用户类
+*/
+static class People implements Serializable {
+private Integer id;
+private String name;
+private Address address;
+// 忽略构造方法、set、get 方法
+}</li></ul> <p>/**</p> <ul><li>地址类
+*/
+static class Address implements Serializable {
+private Integer id;
+private String city;
+// 忽略构造方法、set、get 方法
+}
+}
+以上程序的执行结果为：</li></ul></li></ul> <p>复制
+p1:西安 p2:北京
+可以看出此方法和第三种实现方式类似，都需要实现 Serializable 接口，都是通过字节流的方式实现的，只不过这种实现方式是第三方提供了现成的方法，让我们可以直接调用。</p> <p>5.通过 JSON 工具类实现深克隆</p> <p>本课时我们使用 Google 提供的 JSON 转化工具 Gson 来实现，其他 JSON 转化工具类也是类似的，实现代码如下：</p> <p>复制
+import com.google.gson.Gson;</p> <p>/**</p> <ul><li><p>深克隆实现方式五：通过 JSON 工具实现
+*/
+public class FifthExample {
+public static void main(String[] args) throws CloneNotSupportedException {
+// 创建对象
+Address address = new Address(110, &quot;北京&quot;);
+People p1 = new People(1, &quot;Java&quot;, address);</p> <div class="language- extra-class"><pre><code> // 调用 Gson 克隆对象
+ Gson gson = new Gson();
+ People p2 = gson.fromJson(gson.toJson(p1), People.class);
+
+ // 修改原型对象
+ p1.getAddress().setCity(&quot;西安&quot;);
+
+ // 输出 p1 和 p2 地址信息
+ System.out.println(&quot;p1:&quot; + p1.getAddress().getCity() +
+         &quot; p2:&quot; + p2.getAddress().getCity());
+</code></pre></div><p>}</p> <p>/**</p> <ul><li>用户类
+*/
+static class People {
+private Integer id;
+private String name;
+private Address address;
+// 忽略构造方法、set、get 方法
+}</li></ul> <p>/**</p> <ul><li>地址类
+*/
+static class Address {
+private Integer id;
+private String city;
+// 忽略构造方法、set、get 方法
+}
+}
+以上程序的执行结果为：</li></ul></li></ul> <p>复制
+p1:西安 p2:北京
+使用 JSON 工具类会先把对象转化成字符串，再从字符串转化成新的对象，因为新对象是从字符串转化而来的，因此不会和原型对象有任何的关联，这样就实现了深克隆，其他类似的 JSON 工具类实现方式也是一样的。</p> <p>克隆设计理念猜想
+对于克隆为什么要这样设计，官方没有直接给出答案，我们只能凭借一些经验和源码文档来试着回答一下这个问题。Java 中实现克隆需要两个主要的步骤，一是 实现 Cloneable 空接口，二是重写 Object 的 clone() 方法再调用父类的克隆方法 (super.clone())，那为什么要这么做？</p> <p>从源码中可以看出 Cloneable 接口诞生的比较早，JDK 1.0 就已经存在了，因此从那个时候就已经有克隆方法了，那我们怎么来标识一个类级别对象拥有克隆方法呢？克隆虽然重要，但我们不能给每个类都默认加上克隆，这显然是不合适的，那我们能使用的手段就只有这几个了：</p> <p>在类上新增标识，此标识用于声明某个类拥有克隆的功能，像 final 关键字一样；</p> <p>使用 Java 中的注解；</p> <p>实现某个接口；</p> <p>继承某个类。</p> <p>先说第一个，为了一个重要但不常用的克隆功能， 单独新增一个类标识，这显然不合适；再说第二个，因为克隆功能出现的比较早，那时候还没有注解功能，因此也不能使用；第三点基本满足我们的需求，第四点和第一点比较类似，为了一个克隆功能需要牺牲一个基类，并且 Java 只能单继承，因此这个方案也不合适。采用排除法，无疑使用实现接口的方式是那时最合理的方案了，而且在 Java 语言中一个类可以实现多个接口。</p> <p>那为什么要在 Object 中添加一个 clone() 方法呢？</p> <p>因为 clone() 方法语义的特殊性，因此最好能有 JVM 的直接支持，既然要 JVM 直接支持，就要找一个 API 来把这个方法暴露出来才行，最直接的做法就是把它放入到一个所有类的基类 Object 中，这样所有类就可以很方便地调用到了。</p> <p>小结
+本课时我们讲了浅克隆和深克隆的概念，以及 Object 对 clone() 方法的约定；还演示了数组的 copyOf() 方法其实为浅克隆，以及深克隆的 5 种实现方式；最后我们讲了 Java 语言中克隆的设计思路猜想，希望这些内容能切实的帮助到你。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/FAQ/TCP.html" class="prev">
+        TCP为什么要进行三次握手
+      </a></span> <span class="next"><a href="/FAQ/Java集合/Arrays、Collections、Objects 常用方法源码解析.html">
+        Arrays、Collections、Objects 常用方法源码解析
+      </a>
+      →
+    </span></p></div> </main></div> <!----></main><div class="global-ui"><!----><div id="live2d-widget" class="live2d-widget-container" style="position:fixed;right:65px;bottom:0px;width:135px;height:300px;z-index:99999;opacity:0.8;pointer-events:none;"><canvas id="live2d_canvas" width="135" height="300" class="live2d_canvas" style="position:absolute;left:0px;top:0px;width:135px;height:300px;"></canvas></div></div></div>
+    <script src="/assets/js/app.eb76caeb.js" defer></script><script src="/assets/js/2.6a0604cb.js" defer></script><script src="/assets/js/26.3a036e10.js" defer></script>
+  </body>
+</html>
