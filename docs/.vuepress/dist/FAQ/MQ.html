@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MQ的使用场景 | 大涛的技术博客</title>
+    <meta name="generator" content="VuePress 1.6.0">
+    <link rel="icon" href="/img/icon.png">
+    <meta name="description" content="灵魂在游走，程序在奔跑">
+    <link rel="preload" href="/assets/css/0.styles.6d4461d5.css" as="style"><link rel="preload" href="/assets/js/app.61c80fcc.js" as="script"><link rel="preload" href="/assets/js/2.10aa6be6.js" as="script"><link rel="preload" href="/assets/js/20.782c94c6.js" as="script"><link rel="prefetch" href="/assets/js/10.9496497a.js"><link rel="prefetch" href="/assets/js/11.8118b41d.js"><link rel="prefetch" href="/assets/js/12.4376467d.js"><link rel="prefetch" href="/assets/js/13.9efe1006.js"><link rel="prefetch" href="/assets/js/14.3b12e8ba.js"><link rel="prefetch" href="/assets/js/15.ce49387a.js"><link rel="prefetch" href="/assets/js/16.604bd4d7.js"><link rel="prefetch" href="/assets/js/17.e41f8b7a.js"><link rel="prefetch" href="/assets/js/18.1e6a8684.js"><link rel="prefetch" href="/assets/js/19.ef16a9c3.js"><link rel="prefetch" href="/assets/js/21.fe22e5dc.js"><link rel="prefetch" href="/assets/js/22.f51f8fe7.js"><link rel="prefetch" href="/assets/js/23.06b17ad2.js"><link rel="prefetch" href="/assets/js/24.b2ea8b88.js"><link rel="prefetch" href="/assets/js/25.2adb927e.js"><link rel="prefetch" href="/assets/js/26.cffa2406.js"><link rel="prefetch" href="/assets/js/27.f54bc382.js"><link rel="prefetch" href="/assets/js/28.a6e277c5.js"><link rel="prefetch" href="/assets/js/29.53561dfd.js"><link rel="prefetch" href="/assets/js/3.235d1e32.js"><link rel="prefetch" href="/assets/js/30.d1b7c92d.js"><link rel="prefetch" href="/assets/js/31.b0bb179f.js"><link rel="prefetch" href="/assets/js/32.fe2c6ecb.js"><link rel="prefetch" href="/assets/js/33.6a3be61e.js"><link rel="prefetch" href="/assets/js/34.0c674d89.js"><link rel="prefetch" href="/assets/js/35.acc90f64.js"><link rel="prefetch" href="/assets/js/36.ce73191e.js"><link rel="prefetch" href="/assets/js/37.01e2bad6.js"><link rel="prefetch" href="/assets/js/4.33f1dec2.js"><link rel="prefetch" href="/assets/js/5.7b3484b3.js"><link rel="prefetch" href="/assets/js/6.b398be66.js"><link rel="prefetch" href="/assets/js/7.17b60680.js"><link rel="prefetch" href="/assets/js/8.aab7e4c8.js"><link rel="prefetch" href="/assets/js/9.8404322e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.6d4461d5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><main><!----> <div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">大涛的技术博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Life/" class="nav-link">
+  Life
+</a></div><div class="nav-item"><a href="/FAQ/" class="nav-link router-link-active">
+  求索
+</a></div><div class="nav-item"><a href="/Grow/" class="nav-link">
+  成长
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/qq_43672652" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://juejin.im/user/272334615478478" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  掘金
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://itdatao.github.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Life/" class="nav-link">
+  Life
+</a></div><div class="nav-item"><a href="/FAQ/" class="nav-link router-link-active">
+  求索
+</a></div><div class="nav-item"><a href="/Grow/" class="nav-link">
+  成长
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/qq_43672652" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://juejin.im/user/272334615478478" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  掘金
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://itdatao.github.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Data Base</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design Pattern</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>FAQ</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FAQ/" aria-current="page" class="sidebar-link">常见的面试题</a></li><li><a href="/FAQ/Docker.html" class="sidebar-link">Docker 是什么？它有什么优点？</a></li><li><a href="/FAQ/JDK和CGlib.html" class="sidebar-link">动态代理的实现方式？以及他们之间的区别</a></li><li><a href="/FAQ/MQ.html" aria-current="page" class="active sidebar-link">MQ的使用场景</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FAQ/MQ.html#手写一个消息队列" class="sidebar-link">手写一个消息队列</a></li></ul></li><li><a href="/FAQ/MyBatis.html" class="sidebar-link">Mybatis中用到了那些设计模式</a></li><li><a href="/FAQ/Nginx.html" class="sidebar-link">Nginx</a></li><li><a href="/FAQ/Spring.html" class="sidebar-link">Spring的执行流程和核心功能</a></li><li><a href="/FAQ/SpringBoot的优点.html" class="sidebar-link">SpringBoot的优点</a></li><li><a href="/FAQ/TCP.html" class="sidebar-link">TCP为什么要进行三次握手</a></li><li><a href="/FAQ/深浅克隆的区别.html" class="sidebar-link">深拷贝和浅拷贝的区别</a></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading"><span>Java集合</span> <span class="arrow right"></span></p> <!----></section></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Grow</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Java并发</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Life</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Network</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Spring</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="mq的使用场景"><a href="#mq的使用场景" class="header-anchor">#</a> MQ的使用场景</h1> <p>在介绍 MQ 的使用场景之前，先来回忆一下 MQ 的作用。MQ 可以用来实现削峰填谷，也就是使用它可以解决短时间内爆发式的请求任务，在不使用 MQ 的情况下会导致服务处理不过来，出现应用程序假死的情况，而使用了 MQ 之后可以把这些请求先暂存到消息队列中，然后进行排队执行，那么就不会出现应用程序假死的情况了，所以它的第一个应用就是商品秒杀以及产品抢购等使用场景，如下图所示：</p> <p><img src="F:%5CTyper%E7%AC%94%E8%AE%B0%5C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%5C%E9%9D%A2%E8%AF%95%E9%A2%98%5CCiqc1F6pUvmAD5AIAACea-Dr-GI912.png" alt="图片1.png"></p> <p>使用 MQ 实现消息通讯
+使用 MQ 可以作为消息通讯的实现手段，利用它可以实现点对点的通讯或者多对多的聊天室功能。</p> <p>点对点的消息通讯如下图所示：</p> <p><img src="F:%5CTyper%E7%AC%94%E8%AE%B0%5C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%5C%E9%9D%A2%E8%AF%95%E9%A2%98%5CCiqc1F6pUw6AOt55AAEo3ij3m_I665.png" alt="图片2.png"></p> <p>多对多的消息通讯如下图所示：</p> <p><img src="F:%5CTyper%E7%AC%94%E8%AE%B0%5C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%5C%E9%9D%A2%E8%AF%95%E9%A2%98%5CCgqCHl6pUxaAYKOEAAFfQw8KV78965.png" alt="图片3.png"></p> <p>使用 MQ 实现日志系统
+可使用 MQ 实现对日志的采集和转发，比如有多个日志写入到程序中，然后把日志添加到 MQ，紧接着由日志处理系统订阅 MQ，最后 MQ 将消息接收并转发给日志处理系统，这样就完成了日志的分析和保存功能，如下图所示：</p> <p><img src="F:%5CTyper%E7%AC%94%E8%AE%B0%5C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%5C%E9%9D%A2%E8%AF%95%E9%A2%98%5CCiqc1F6pUx-AOEVkAACdQvKFiYs680.png" alt="图片4.png"></p> <p>常用的 MQ 中间件有 RabbitMQ、Kafka 和 Redis 等，其中 Redis 属于轻量级的消息队列，而 RabbitMQ、Kafka 属于比较成熟且比较稳定和高效的 MQ 中间件。</p> <p>考点分析
+MQ 属于中高级或优秀的程序员必备的技能，对于 MQ 中间件掌握的数量则是你技术广度和编程经验的直接体现信息之一。值得庆幸的是，关于 MQ 中间件的实现原理和使用方式都比较类似，因此如果开发者掌握一项 MQ 中间件再去熟悉其他 MQ 中间件时，会非常的容易。</p> <p>MQ 相关的面试题还有这些：</p> <p>MQ 的特点是什么？引入 MQ 中间件会带来哪些问题？
+常见的 MQ 中间件的优缺点分析。
+知识扩展
+MQ 的特点及注意事项
+MQ 具有以下 5 个特点。</p> <p>先进先出：消息队列的顺序一般在入列时就基本确定了，最先到达消息队列的信息，一般情况下也会先转发给订阅的消费者，我们把这种实现了先进先出的数据结构称之为队列。
+发布、订阅工作模式：生产者也就是消息的创建者，负责创建和推送数据到消息服务器；消费者也就是消息的接收方，用于处理数据和确认消息的消费；消息队列也是 MQ 服务器中最重要的组成元素之一，它负责消息的存储，这三者是 MQ 中的三个重要角色。而它们之间的消息传递与转发都是通过发布以及订阅的工作模式来进行的，即生产者把消息推送到消息队列，消费者订阅到相关的消息后进行消费，在消息非阻塞的情况下，此模式基本可以实现同步操作的效果。并且此种工作模式会把请求的压力转移给 MQ 服务器，以减少了应用服务器本身的并发压力。
+持久化：持久化是把消息从内存存储到磁盘的过程，并且在服务器重启或者发生宕机的情况下，重新启动服务器之后是保证数据不会丢失的一种手段，也是目前主流 MQ 中间件都会提供的重要功能。
+分布式：MQ 的一个主要特性就是要应对大流量、大数据的高并发环境，一个单体的 MQ 服务器是很难应对这种高并发的压力的，所以 MQ 服务器都会支持分布式应用的部署，以分摊和降低高并发对 MQ 系统的冲击。
+消息确认：消息消费确认是程序稳定性和安全性的一个重要考核指标，假如消费者在拿到消息之后突然宕机了，那么 MQ 服务器会误认为此消息已经被消费者消费了，从而造成消息丢失的问题，而目前市面上的主流 MQ 都实现了消息确认的功能，保证了消息不会丢失，从而保证了系统的稳定性。
+引入 MQ 系统会带来的问题
+任何系统的引入都是有两面性的，MQ 也不例外，在引入 MQ 之后，可能会带来以下两个问题。</p> <p>增加了系统的运行风险：引入 MQ 系统，则意味着新增了一套系统，并且其他的业务系统会对 MQ 系统进行深度依赖，系统部署的越多则意味着发生故障的可能性就越大，如果 MQ 系统挂掉的话可能会导致整个业务系统瘫痪。
+增加了系统的复杂度：引入 MQ 系统后，需要考虑消息丢失、消息重复消费、消息的顺序消费等问题，同时还需要引入新的客户端来处理 MQ 的业务，增加了编程的运维门槛，增加了系统的复杂性。
+使用 MQ 需要注意的问题，不要过度依赖 MQ，比如发送短信验证码或邮件等功能，这种低频但有可能比较耗时的功能可以使用多线程异步处理即可，不用任何的功能都依赖 MQ 中间件来完成，但像秒杀抢购可能会导致超卖（也就是把货卖多了，库存变成负数了）等短时间内高并发的请求，此时建议使用 MQ 中间件。</p> <p>常用的 MQ 中间件
+常用的 MQ 中间件有 Redis、RabbitMQ、Kafka，下来我们分别来看看各自的作用。</p> <p>Redis 轻量级的消息中间件
+Redis 是一个高效的内存性数据库中间件，但使用 Redis 也可以实现消息队列的功能。</p> <p>早期的 Redis（Redis 5.0 之前）是不支持消息确认的，那时候我们可以通过 List 数据类型的 lpush 和 rpop 方法来实现队列消息的存入和读取功能，或者使用 Redis 提供的发布订阅（pub/sub）功能来实现消息队列，但这种模式不支持持久化，List 虽然支持持久化但不能设置复杂的路由规则来匹配多个消息，并且他们二者都不支持消息消费确认。</p> <p>于是在 Redis 5.0 之后提供了新的数据类型 Stream 解决了消息确认的问题，但它同样不能提供复杂的路由匹配规则，因此在业务不复杂的场景下可以尝试性的使用 Redis 提供的消息队列。</p> <p>RabbitMQ
+在第 10 课时中，我们对 RabbitMQ 有过初步的讲解，它是一个实现了标准的高级消息队列协议（AMQP，Advanced Message Queuing Protocol）的老牌开源消息中间件，最初起源于金融系统，后来被普遍应用在了其他分布式系统中，它支持集群部署，和多种客户端调用。</p> <p>之前主要介绍了 RabbitMQ 的基础功能，本课时我们重点来看 RabbitMQ 集群相关的内容。</p> <p>RabbitMQ 集群是由多个节点组成，但默认情况下每个节点并不是存储所有队列的完整拷贝，这是出于存储空间和性能的考虑，因为如果存储了队列的完整拷贝，那么就会有很多冗余的重复数据，并且在新增节点的情况下，不但没有新增存储空间，反而需要更大的空间来存储旧的数据；同样的道理，如果每个节点都保存了所有队列的完整信息，那么非查询操作的性能就会很慢，就会需要更多的网络带宽和磁盘负载来存储这些数据。</p> <p>为了能兼顾性能和稳定性，RabbitMQ 集群的节点分为两种类型，即磁盘节点和内存节点，对于磁盘节点来说显然它的优势就是稳定，可以把相关数据保存下来，若 RabbitMQ 因为意外情况宕机，重启之后保证了数据不丢失；而内存节点的优势是快，因为是在内存中进行数据交换和操作，因此性能比磁盘节点要高出很多倍。</p> <p>如果是单个 RabbitMQ 那么就必须要求是磁盘节点，否则当 RabbitMQ 服务器重启之后所有的数据都会丢失，这样显然是不能接受的。在 RabbitMQ 的集群中，至少需要一个磁盘节点，这样至少能保证集群数据的相对可靠性。</p> <p>如果集群中的某一个磁盘节点崩溃了，此时整个 RabbitMQ 服务也不会处于崩溃的状态，不过部分操作会受影响，比如不能创建队列、交换器、也不能添加用户及修改用户权限，更不能添加和删除集群的节点等功能。</p> <p>小贴士：对于 RabbitMQ 集群来说，我们启动集群节点的顺序应该是先启动磁盘节点再启动内存节点，而关闭的顺序正好和启动的顺序相反，不然可能会导致 RabbitMQ 集群启动失败或者是数据丢失等异常问题。</p> <p>Kafka
+Kafka 是 LinkedIn 公司开发的基于 ZooKeeper 的多分区、多副本的分布式消息系统，它于 2010 年贡献给了 Apache 基金会，并且成为了 Apache 的顶级开源项目。其中 ZooKeeper 的作用是用来为 Kafka 提供集群元数据管理以及节点的选举和发现等功能。</p> <p>与 RabbitMQ 比较类似，一个典型的 Kafka 是由多个 Broker、多个生产者和消费者，以及 ZooKeeper 集群组成的，其中 Broker 可以理解为一个代理，Kafka 集群中的一台服务器称之为一个 Broker，其组成框架图如下所示：</p> <p><img src="F:%5CTyper%E7%AC%94%E8%AE%B0%5C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%5C%E9%9D%A2%E8%AF%95%E9%A2%98%5CCiqc1F6pVM6AYc7IAADyGfH6aOQ413.png" alt="image.png"></p> <p>Kafka VS RabbitMQ
+Kafka（2.0.0）和 RabbitMQ（3.6.10）的区别主要体现在以下几点：</p> <p>Kafka 支持消息回溯，它可以根据 Offset（消息偏移量）、TimeStamp（时间戳）等维度进行消息回溯，而 RabbitMQ 并不支持消息回溯；
+Kafka 的消息消费是基于拉取数据的模式，也就是消费者主动向服务器端发送拉取消息请求，而 RabbitMQ 支持拉取数据模式和主动推送数据的模式，也就说 RabbitMQ 服务器会主动把消息推送给订阅的消费者；
+在相同配置下，Kafka 的吞吐量通常会比 RabbitMQ 高一到两个级别，比如在单机模式下，RabbitMQ 的吞吐量大概是万级别的处理能力，而 Kafka 则可以到达十万甚至是百万的吞吐级别；
+Kafka 从 0.11 版本就开始支持幂等性了，当然所谓的幂等性指的是对单个生产者在单分区上的单会话的幂等操作，但对于全局幂等性则还需要结合业务来处理，比如，消费者在消费完一条消息之后没有来得及确认就发生异常了，等到恢复之后又得重新消费原来消费过的消息，类似这种情况，是无法在消息中间件层面来保证的，这个时候则需要引入更多的外部资源来保证全局幂等性，比如唯一的订单号、消费之前先做去重判断等；而 RabbitMQ 是没有幂等性功能支持的；
+RabbitMQ 支持多租户的功能，也就是常说的 Virtual Host（vhost），每一个 vhost 相当于一个独立的小型 RabbitMQ 服务器，它们拥有自己独立的交换器、消息队列及绑定关系等，并且拥有自己独立权限，而且多个 vhost 之间是绝对隔离的，但 Kafka 并不支持多租户的功能。
+Kafka 和 RabbitMQ 都支持分布式集群部署，并且都支持数据持久化和消息消费确认等 MQ 的核心功能，对于 MQ 的选型要结合自己团队本身的情况，从性能、稳定性及二次开发的难易程度等维度来进行综合的考量并选择。</p> <p>小结
+本课时我们讲了 MQ 的常见使用场景，以及常见的 MQ 中间件（Redis、RabbitMQ、Kafka）及其优缺点分析；同时还了解了 MQ 的五大特点：先进先出、发布和订阅的模式、持久化、分布式和消息确认等；接着讲了 MQ 引入对系统可能带来的风险；最后讲了 MQ 在使用时需要注意的问题。希望本课时对你整体了解 MQ 系统有所帮助。</p> <h2 id="手写一个消息队列"><a href="#手写一个消息队列" class="header-anchor">#</a> 手写一个消息队列</h2> <p>第一次听到“消息队列”这个词时，不知你是不是和我反应一样，感觉很高阶很厉害的样子，其实当我们了解了消息队列之后，发现它与普通的技术类似，当我们熟悉之后，也能很快地上手并使用。</p> <p>我们本课时的面试题是，消息队列的使用场景有哪些？如何手动实现一个消息队列和延迟消息队列？</p> <p>典型回答
+消息队列的使用场景有很多，最常见的使用场景有以下几个。</p> <p>1.商品秒杀</p> <p>比如，我们在做秒杀活动时，会发生短时间内出现爆发式的用户请求，如果不采取相关的措施，会导致服务器忙不过来，响应超时的问题，轻则会导致服务假死，重则会让服务器直接宕机，给用户带来的体验也非常不好。如果这个时候加上了消息队列，服务器接收到用户的所有请求后，先把这些请求全部写入到消息队列中再排队处理，这样就不会导致同时处理多个请求的情况；如果消息队列长度超过可以承载的最大数量，那么我们可以抛弃当前用户的请求，通知前台用户“页面出错啦，请重新刷新”等提示，这样就会有更好的交互体验。</p> <p>2.系统解耦</p> <p>使用了消息队列之后，我们可以把系统的业务功能模块化，实现系统的解耦。例如，在没有使用消息队列之前，当前台用户完善了个人信息之后，首先我们需要更新用户的资料，再添加一条用户信息修改日志。但突然有一天产品经理提了一个需求，在前台用户信息更新之后，需要给此用户的增加一定的积分奖励，然后没过几天产品经理又提了一个需求，在前台用户信息更新之后，不但要增加积分奖励，还要增加用户的经验值，但没过几天产品经理的需求又变了，他要求完善资料无需增加用户的积分了，这样反反复复、来来回回的折腾，我想研发的同学一定受不了，但这是互联网公司的常态，那我们有没有一劳永逸的办法呢？</p> <p>没错，这个时候我们想到了使用消息队列来实现系统的解耦，每个功能的实现独立开，只需要一个订阅或者取消订阅的开关就可以了，当需要增加功能时，只需要打开订阅“用户信息完善”的队列就行，如果过两天不用了，再把订阅的开关关掉就行了，这样我们就不用来来回回的改业务代码了，也就轻松的实现了系统模块间的解耦。</p> <p>3.日志记录</p> <p>我们大部分的日志记录行为其实是和前台用户操作的主业务没有直接关系的，只是我们的运营人和经营人员需要拿到这部分用户操作的日志信息，来进行用户行为分析或行为监控。在我们没有使用消息队列之前，笼统的做法是当有用户请求时，先处理用户的请求再记录日志，这两个操作是放在一起的，而前台用户也需要等待日志添加完成之后才能拿到后台的响应信息，这样其实浪费了前台用户的部分时间。此时我们可以使用消息队列，当响应完用户请求之后，只需要把这个操作信息放入消息队列之后，就可以直接返回结果给前台用户了，无序等待日志处理和日志添加完成，从而缩短了前台用户的等待时间。</p> <p>我们可以通过 JDK 提供的 Queue 来实现自定义消息队列，使用 DelayQueue 实现延迟消息队列。</p> <p>考点分析
+对于消息队列的考察更侧重于消息队列的核心思想，因为只有理解了什么是消息队列？以及什么情况下要用消息队列？才能解决我们日常工作中遇到的问题，而消息队列的具体实现，只需要掌握一个消息中间件的使用即可，因为消息队列中间件的核心实现思路是一致的，不但如此，消息队列中间件的使用也大致类似，只要掌握了一个就能触类旁通的用好其他消息中间件。</p> <p>和本课时相关的面试题，还有以下这两个：</p> <p>介绍一个你熟悉的消息中间件？
+如何手动实现消息队列？
+知识扩展
+1.常用消息中间件 RabbitMQ
+目前市面上比较常用的 MQ（Message Queue，消息队列）中间件有 RabbitMQ、Kafka、RocketMQ，如果是轻量级的消息队列可以使用 Redis 提供的消息队列，本课时我们先来介绍一下 RabbitMQ，其他消息中间件将会在第 15 课时中单独介绍。</p> <p>RabbitMQ 是一个老牌开源的消息中间件，它实现了标准的 AMQP（Advanced Message Queuing Protocol，高级消息队列协议）消息中间件，使用 Erlang 语言开发，支持集群部署，和多种客户端语言混合调用，它支持的主流开发语言有以下这些：</p> <p>Java and Spring
+.NET
+Ruby
+Python
+PHP
+JavaScript and Node
+Objective-C and Swift
+Rust
+Scala
+Go
+更多支持语言，请点击这里访问官网查看。</p> <p>RabbitMQ 中有 3 个重要的概念：生产者、消费者和代理。</p> <p>生产者：消息的创建者，负责创建和推送数据到消息服务器。
+消费者：消息的接收方，用于处理数据和确认消息。
+代理：也就是 RabbitMQ 服务本身，它用于扮演“快递”的角色，因为它本身并不生产消息，只是扮演了“快递”的角色，把消息进行暂存和传递。
+它们的运行流程，如下图所示：</p> <p><img src="https://gitee.com/bailefolen/typora-pictures/raw/master/img/Ciqah16QOkmAX3_TAABZ5pEPvmQ772.png" alt="img"></p> <p>RabbitMQ 具备以下几个优点：</p> <p>支持持久化，RabbitMQ 支持磁盘持久化功能，保证了消息不会丢失；
+高并发，RabbitMQ 使用了 Erlang 开发语言，Erlang 是为电话交换机开发的语言，天生自带高并发光环和高可用特性；
+支持分布式集群，正是因为 Erlang 语言实现的，因此 RabbitMQ 集群部署也非常简单，只需要启动每个节点并使用 --link 把节点加入到集群中即可，并且 RabbitMQ 支持自动选主和自动容灾；
+支持多种语言，比如 Java、.NET、PHP、Python、JavaScript、Ruby、Go 等；
+支持消息确认，支持消息消费确认（ack）保证了每条消息可以被正常消费；
+它支持很多插件，比如网页控制台消息管理插件、消息延迟插件等，RabbitMQ 的插件很多并且使用都很方便。
+RabbitMQ 的消息类型，分为以下四种：</p> <p>direct（默认类型）模式，此模式为一对一的发送方式，也就是一条消息只会发送给一个消费者；
+headers 模式，允许你匹配消息的 header 而非路由键（RoutingKey），除此之外 headers 和 direct 的使用完全一致，但因为 headers 匹配的性能很差，几乎不会被用到；
+fanout 模式，为多播的方式，会把一个消息分发给所有的订阅者；
+topic 模式，为主题订阅模式，允许使用通配符（#、*）匹配一个或者多个消息，我可以使用“cn.mq.#”匹配到多个前缀是“cn.mq.xxx”的消息，比如可以匹配到“cn.mq.rabbit”、“cn.mq.kafka”等消息。
+2.自定义消息队列
+我们可使用 Queue 来实现消息队列，Queue 大体可分为以下三类：</p> <p>**双端队列（Deque）**是 Queue 的子类也是 Queue 的补充类，头部和尾部都支持元素插入和获取；
+阻塞队列指的是在元素操作时（添加或删除），如果没有成功，会阻塞等待执行，比如当添加元素时，如果队列元素已满，队列则会阻塞等待直到有空位时再插入；
+非阻塞队列，和阻塞队列相反，它会直接返回操作的结果，而非阻塞等待操作，双端队列也属于非阻塞队列。
+自定义消息队列的实现代码如下：</p> <p>复制
+import java.util.LinkedList;
+import java.util.Queue;</p> <p>public class CustomQueue {
+// 定义消息队列
+private static Queue<String> queue = new LinkedList&lt;&gt;();</String></p> <div class="language- extra-class"><pre><code>public static void main(String[] args) {
+    producer(); // 调用生产者
+    consumer(); // 调用消费者
+}
+
+// 生产者
+public static void producer() {
+    // 添加消息
+    queue.add(&quot;first message.&quot;);
+    queue.add(&quot;second message.&quot;);
+    queue.add(&quot;third message.&quot;);
+}
+
+// 消费者
+public static void consumer() {
+    while (!queue.isEmpty()) {
+        // 消费消息
+        System.out.println(queue.poll());
+    }
+}
+</code></pre></div><p>}
+以上程序的执行结果是：</p> <p>复制
+first message.
+second message.
+third message.
+可以看出消息是以先进先出顺序进行消费的。</p> <p>实现自定义延迟队列需要实现 Delayed 接口，重写 getDelay() 方法，延迟队列完整实现代码如下：</p> <p>复制
+import lombok.Getter;
+import lombok.Setter;</p> <p>import java.text.DateFormat;
+import java.util.Date;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.Delayed;
+import java.util.concurrent.TimeUnit;</p> <p>/**</p> <ul><li><p>自定义延迟队列
+*/
+public class CustomDelayQueue {
+// 延迟消息队列
+private static DelayQueue delayQueue = new DelayQueue();</p> <p>public static void main(String[] args) throws InterruptedException {
+producer(); // 调用生产者
+consumer(); // 调用消费者
+}</p> <p>// 生产者
+public static void producer() {
+// 添加消息
+delayQueue.put(new MyDelay(1000, &quot;消息1&quot;));
+delayQueue.put(new MyDelay(3000, &quot;消息2&quot;));
+}</p> <p>// 消费者
+public static void consumer() throws InterruptedException {
+System.out.println(&quot;开始执行时间：&quot; +
+DateFormat.getDateTimeInstance().format(new Date()));
+while (!delayQueue.isEmpty()) {
+System.out.println(delayQueue.take());
+}
+System.out.println(&quot;结束执行时间：&quot; +
+DateFormat.getDateTimeInstance().format(new Date()));
+}</p> <p>/**</p> <ul><li><p>自定义延迟队列
+*/
+static class MyDelay implements Delayed {
+// 延迟截止时间（单位：毫秒）
+long delayTime = System.currentTimeMillis();</p> <p>// 借助 lombok 实现
+@Getter
+@Setter
+private String msg;</p> <p>/**</p> <ul><li>初始化</li> <li>@param delayTime 设置延迟执行时间</li> <li>@param msg       执行的消息
+*/
+public MyDelay(long delayTime, String msg) {
+this.delayTime = (this.delayTime + delayTime);
+this.msg = msg;
+}</li></ul> <p>// 获取剩余时间
+@Override
+public long getDelay(TimeUnit unit) {
+return unit.convert(delayTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+}</p> <p>// 队列里元素的排序依据
+@Override
+public int compareTo(Delayed o) {
+if (this.getDelay(TimeUnit.MILLISECONDS) &gt; o.getDelay(TimeUnit.MILLISECONDS)) {
+return 1;
+} else if (this.getDelay(TimeUnit.MILLISECONDS) &lt; o.getDelay(TimeUnit.MILLISECONDS)) {
+return -1;
+} else {
+return 0;
+}
+}</p> <p>@Override
+public String toString() {
+return this.msg;
+}
+}
+}
+以上程序的执行结果是：</p></li></ul></li></ul> <p>复制
+开始执行时间：2020-4-2 16:17:28
+消息1
+消息2
+结束执行时间：2020-4-2 16:17:31</p> <p>可以看出，消息 1 和消息 2 都实现了延迟执行的功能。</p> <p>小结
+本课时讲了消息队列的使用场景：商品秒杀、系统解耦和日志记录，我们还介绍了 RabbitMQ 以及它的消息类型和它的特点等内容，同时还使用 Queue 的子类 LinkedList 实现了自定义消息队列，使用 DelayQueue 实现了自定义延迟消息队列。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/FAQ/JDK和CGlib.html" class="prev">
+        动态代理的实现方式？以及他们之间的区别
+      </a></span> <span class="next"><a href="/FAQ/MyBatis.html">
+        Mybatis中用到了那些设计模式
+      </a>
+      →
+    </span></p></div> </main></div> <!----></main><div class="global-ui"><div></div><div id="live2d-widget" class="live2d-widget-container" style="position:fixed;right:65px;bottom:0px;width:135px;height:300px;z-index:99999;opacity:0.8;pointer-events:none;"><canvas id="live2d_canvas" width="135" height="300" class="live2d_canvas" style="position:absolute;left:0px;top:0px;width:135px;height:300px;"></canvas></div></div></div>
+    <script src="/assets/js/app.61c80fcc.js" defer></script><script src="/assets/js/2.10aa6be6.js" defer></script><script src="/assets/js/20.782c94c6.js" defer></script>
+  </body>
+</html>

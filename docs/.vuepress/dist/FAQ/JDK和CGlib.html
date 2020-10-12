@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>动态代理的实现方式？以及他们之间的区别 | 大涛的技术博客</title>
+    <meta name="generator" content="VuePress 1.6.0">
+    <link rel="icon" href="/img/icon.png">
+    <meta name="description" content="灵魂在游走，程序在奔跑">
+    <link rel="preload" href="/assets/css/0.styles.6d4461d5.css" as="style"><link rel="preload" href="/assets/js/app.61c80fcc.js" as="script"><link rel="preload" href="/assets/js/2.10aa6be6.js" as="script"><link rel="preload" href="/assets/js/10.9496497a.js" as="script"><link rel="prefetch" href="/assets/js/11.8118b41d.js"><link rel="prefetch" href="/assets/js/12.4376467d.js"><link rel="prefetch" href="/assets/js/13.9efe1006.js"><link rel="prefetch" href="/assets/js/14.3b12e8ba.js"><link rel="prefetch" href="/assets/js/15.ce49387a.js"><link rel="prefetch" href="/assets/js/16.604bd4d7.js"><link rel="prefetch" href="/assets/js/17.e41f8b7a.js"><link rel="prefetch" href="/assets/js/18.1e6a8684.js"><link rel="prefetch" href="/assets/js/19.ef16a9c3.js"><link rel="prefetch" href="/assets/js/20.782c94c6.js"><link rel="prefetch" href="/assets/js/21.fe22e5dc.js"><link rel="prefetch" href="/assets/js/22.f51f8fe7.js"><link rel="prefetch" href="/assets/js/23.06b17ad2.js"><link rel="prefetch" href="/assets/js/24.b2ea8b88.js"><link rel="prefetch" href="/assets/js/25.2adb927e.js"><link rel="prefetch" href="/assets/js/26.cffa2406.js"><link rel="prefetch" href="/assets/js/27.f54bc382.js"><link rel="prefetch" href="/assets/js/28.a6e277c5.js"><link rel="prefetch" href="/assets/js/29.53561dfd.js"><link rel="prefetch" href="/assets/js/3.235d1e32.js"><link rel="prefetch" href="/assets/js/30.d1b7c92d.js"><link rel="prefetch" href="/assets/js/31.b0bb179f.js"><link rel="prefetch" href="/assets/js/32.fe2c6ecb.js"><link rel="prefetch" href="/assets/js/33.6a3be61e.js"><link rel="prefetch" href="/assets/js/34.0c674d89.js"><link rel="prefetch" href="/assets/js/35.acc90f64.js"><link rel="prefetch" href="/assets/js/36.ce73191e.js"><link rel="prefetch" href="/assets/js/37.01e2bad6.js"><link rel="prefetch" href="/assets/js/4.33f1dec2.js"><link rel="prefetch" href="/assets/js/5.7b3484b3.js"><link rel="prefetch" href="/assets/js/6.b398be66.js"><link rel="prefetch" href="/assets/js/7.17b60680.js"><link rel="prefetch" href="/assets/js/8.aab7e4c8.js"><link rel="prefetch" href="/assets/js/9.8404322e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.6d4461d5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><main><!----> <div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">大涛的技术博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Life/" class="nav-link">
+  Life
+</a></div><div class="nav-item"><a href="/FAQ/" class="nav-link router-link-active">
+  求索
+</a></div><div class="nav-item"><a href="/Grow/" class="nav-link">
+  成长
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/qq_43672652" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://juejin.im/user/272334615478478" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  掘金
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://itdatao.github.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Life/" class="nav-link">
+  Life
+</a></div><div class="nav-item"><a href="/FAQ/" class="nav-link router-link-active">
+  求索
+</a></div><div class="nav-item"><a href="/Grow/" class="nav-link">
+  成长
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/qq_43672652" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://juejin.im/user/272334615478478" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  掘金
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://itdatao.github.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="outbound-link-title" role="img" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><title id="outbound-link-title">(opens new window)</title> <path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Data Base</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design Pattern</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>FAQ</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FAQ/" aria-current="page" class="sidebar-link">常见的面试题</a></li><li><a href="/FAQ/Docker.html" class="sidebar-link">Docker 是什么？它有什么优点？</a></li><li><a href="/FAQ/JDK和CGlib.html" class="active sidebar-link">动态代理的实现方式？以及他们之间的区别</a></li><li><a href="/FAQ/MQ.html" class="sidebar-link">MQ的使用场景</a></li><li><a href="/FAQ/MyBatis.html" class="sidebar-link">Mybatis中用到了那些设计模式</a></li><li><a href="/FAQ/Nginx.html" class="sidebar-link">Nginx</a></li><li><a href="/FAQ/Spring.html" class="sidebar-link">Spring的执行流程和核心功能</a></li><li><a href="/FAQ/SpringBoot的优点.html" class="sidebar-link">SpringBoot的优点</a></li><li><a href="/FAQ/TCP.html" class="sidebar-link">TCP为什么要进行三次握手</a></li><li><a href="/FAQ/深浅克隆的区别.html" class="sidebar-link">深拷贝和浅拷贝的区别</a></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading"><span>Java集合</span> <span class="arrow right"></span></p> <!----></section></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Grow</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Java并发</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Life</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Network</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Spring</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="动态代理的实现方式-以及他们之间的区别"><a href="#动态代理的实现方式-以及他们之间的区别" class="header-anchor">#</a> 动态代理的实现方式？以及他们之间的区别</h1> <p>90% 的程序员直接或者间接的使用过动态代理，无论是日志框架或 Spring 框架，它们都包含了动态代理的实现代码。动态代理是程序在运行期间动态构建代理对象和动态调用代理方法的一种机制。</p> <p>我们本课时的面试题是，如何实现动态代理？JDK Proxy 和 CGLib 有什么区别？</p> <p>典型回答
+动态代理的常用实现方式是反射。反射机制是指程序在运行期间可以访问、检测和修改其本身状态或行为的一种能力，使用反射我们可以调用任意一个类对象，以及类对象中包含的属性及方法。</p> <p>但动态代理不止有反射一种实现方式，例如，动态代理可以通过 CGLib 来实现，而 CGLib 是基于 ASM（一个 Java 字节码操作框架）而非反射实现的。简单来说，动态代理是一种行为方式，而反射或 ASM 只是它的一种实现手段而已。</p> <p>JDK Proxy 和 CGLib 的区别主要体现在以下几个方面：</p> <p>JDK Proxy 是 Java 语言自带的功能，无需通过加载第三方类实现；
+Java 对 JDK Proxy 提供了稳定的支持，并且会持续的升级和更新 JDK Proxy，例如 Java 8 版本中的 JDK Proxy 性能相比于之前版本提升了很多；
+JDK Proxy 是通过拦截器加反射的方式实现的；
+JDK Proxy 只能代理继承接口的类；
+JDK Proxy 实现和调用起来比较简单；
+CGLib 是第三方提供的工具，基于 ASM 实现的，性能比较高；
+CGLib 无需通过接口来实现，它是通过实现子类的方式来完成调用的。
+考点分析
+本课时考察的是你对反射、动态代理及 CGLib 的了解，很多人经常会把反射和动态代理划为等号，但从严格意义上来说，这种想法是不正确的，真正能搞懂它们之间的关系，也体现了你扎实 Java 的基本功。和这个问题相关的知识点，还有以下几个：</p> <p>你对 JDK Proxy 和 CGLib 的掌握程度。
+Lombok 是通过反射实现的吗？
+动态代理和静态代理有什么区别？
+动态代理的使用场景有哪些？
+Spring 中的动态代理是通过什么方式实现的？
+知识扩展
+1.JDK Proxy 和 CGLib 的使用及代码分析
+JDK Proxy 动态代理实现</p> <p>JDK Proxy 动态代理的实现无需引用第三方类，只需要实现 InvocationHandler 接口，重写 invoke() 方法即可，整个实现代码如下所示：</p> <p>复制
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;</p> <p>/**</p> <ul><li><p>JDK Proxy 相关示例
+*/
+public class ProxyExample {
+static interface Car {
+void running();
+}</p> <p>static class Bus implements Car {
+@Override
+public void running() {
+System.out.println(&quot;The bus is running.&quot;);
+}
+}</p> <p>static class Taxi implements Car {
+@Override
+public void running() {
+System.out.println(&quot;The taxi is running.&quot;);
+}
+}</p> <p>/**</p> <ul><li><p>JDK Proxy
+*/
+static class JDKProxy implements InvocationHandler {
+private Object target; // 代理对象</p> <p>// 获取到代理对象
+public Object getInstance(Object target) {
+this.target = target;
+// 取得代理对象
+return Proxy.newProxyInstance(target.getClass().getClassLoader(),
+target.getClass().getInterfaces(), this);
+}</p> <p>/**</p> <ul><li>执行代理方法</li> <li>@param proxy  代理对象</li> <li>@param method 代理方法</li> <li>@param args   方法的参数</li> <li>@return</li> <li>@throws InvocationTargetException</li> <li>@throws IllegalAccessException
+*/
+@Override
+public Object invoke(Object proxy, Method method, Object[] args)
+throws InvocationTargetException, IllegalAccessException {
+System.out.println(&quot;动态代理之前的业务处理.&quot;);
+Object result = method.invoke(target, args); // 执行调用方法（此方法执行前后，可以进行相关业务处理）
+return result;
+}
+}</li></ul></li></ul> <p>public static void main(String[] args) {
+// 执行 JDK Proxy
+JDKProxy jdkProxy = new JDKProxy();
+Car carInstance = (Car) jdkProxy.getInstance(new Taxi());
+carInstance.running();
+以上程序的执行结果是：</p></li></ul> <p>复制
+动态代理之前的业务处理.
+The taxi is running.
+可以看出 JDK Proxy 实现动态代理的核心是实现 Invocation 接口，我们查看 Invocation 的源码，会发现里面其实只有一个 invoke() 方法，源码如下：</p> <p>复制
+public interface InvocationHandler {
+public Object invoke(Object proxy, Method method, Object[] args)
+throws Throwable;
+}
+这是因为在动态代理中有一个重要的角色也就是代理器，它用于统一管理被代理的对象，显然 InvocationHandler 就是这个代理器，而 invoke() 方法则是触发代理的执行方法，我们通过实现 Invocation 接口来拥有动态代理的能力。</p> <p>CGLib 的实现</p> <p>在使用 CGLib 之前，我们要先在项目中引入 CGLib 框架，在 pom.xml 中添加如下配置：</p> <p>复制
+ <dependency><groupId>cglib</groupId> <artifactId>cglib</artifactId> <version>3.3.0</version></dependency>
+CGLib 实现代码如下：</p> <p>复制
+package com.lagou.interview;</p> <p>import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;</p> <p>import java.lang.reflect.Method;</p> <p>public class CGLibExample {</p> <div class="language- extra-class"><pre><code>static class Car {
+    public void running() {
+        System.out.println(&quot;The car is running.&quot;);
+    }
+}
+
+/**
+ * CGLib 代理类
+ */
+static class CGLibProxy implements MethodInterceptor {
+    private Object target; // 代理对象
+
+    public Object getInstance(Object target) {
+        this.target = target;
+        Enhancer enhancer = new Enhancer();
+        // 设置父类为实例类
+        enhancer.setSuperclass(this.target.getClass());
+        // 回调方法
+        enhancer.setCallback(this);
+        // 创建代理对象
+        return enhancer.create();
+    }
+
+    @Override
+    public Object intercept(Object o, Method method,
+                            Object[] objects, MethodProxy methodProxy) throws Throwable {
+        System.out.println(&quot;方法调用前业务处理.&quot;);
+        Object result = methodProxy.invokeSuper(o, objects); // 执行方法调用
+        return result;
+    }
+}
+
+// 执行 CGLib 的方法调用
+public static void main(String[] args) {
+    // 创建 CGLib 代理类
+    CGLibProxy proxy = new CGLibProxy();
+    // 初始化代理对象
+    Car car = (Car) proxy.getInstance(new Car());
+    // 执行方法
+    car.running();
+</code></pre></div><p>以上程序的执行结果是：</p> <p>复制
+方法调用前业务处理.
+The car is running.
+可以看出 CGLib 和 JDK Proxy 的实现代码比较类似，都是通过实现代理器的接口，再调用某一个方法完成动态代理的，唯一不同的是，CGLib 在初始化被代理类时，是通过 Enhancer 对象把代理对象设置为被代理类的子类来实现动态代理的。因此被代理类不能被关键字 final 修饰，如果被 final 修饰，再使用 Enhancer 设置父类时会报错，动态代理的构建会失败。</p> <p>2.Lombok 原理分析
+在开始讲 Lombok 的原理之前，我们先来简单地介绍一下 Lombok，它属于 Java 的一个热门工具类，使用它可以有效的解决代码工程中那些繁琐又重复的代码，如 Setter、Getter、toString、equals 和 hashCode 等等，向这种方法都可以使用 Lombok 注解来完成。</p> <p>例如，我们使用比较多的 Setter 和 Getter 方法，在没有使用 Lombok 之前，代码是这样的：</p> <p>复制
+public class Person {
+private Integer id;
+private String name;
+public Integer getId() {
+return id;
+}
+public void setId(Integer id) {
+this.id = id;
+}
+public String getName() {
+return name;
+}
+public void setName(String name) {
+this.name = name;
+}
+}
+在使用 Lombok 之后，代码是这样的：</p> <p>复制
+@Data
+public class Person {
+private Integer id;
+private String name;
+}
+可以看出 Lombok 让代码简单和优雅了很多。</p> <p>小贴士：如果在项目中使用了 Lombok 的 Getter 和 Setter 注解，那么想要在编码阶段成功调用对象的 set 或 get 方法，我们需要在 IDE 中安装 Lombok 插件才行，比如 Idea 的插件如下图所示：</p> <p><img src="F:%5CTyper%E7%AC%94%E8%AE%B0%5C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%5C%E9%9D%A2%E8%AF%95%E9%A2%98%5CCiqah16HCB6AcjsPAAIhVz8yo1o620.png" alt="img"></p> <p>接下来讲讲 Lombok 的原理。</p> <p>Lombok 的实现和反射没有任何关系，前面我们说了反射是程序在运行期的一种自省（introspect）能力，而 Lombok 的实现是在编译期就完成了，为什么这么说呢？</p> <p>回到我们刚才 Setter/Getter 的方法，当我们打开 Person 的编译类就会发现，使用了 Lombok 的 @Data 注解后的源码竟然是这样的：</p> <p><img src="F:%5CTyper%E7%AC%94%E8%AE%B0%5C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%5C%E9%9D%A2%E8%AF%95%E9%A2%98%5CCgq2xl6HCB6AXaC5AAHG477g0yQ093.png" alt="img"></p> <p>可以看出 Lombok 是在编译期就为我们生成了对应的字节码。</p> <p>其实 Lombok 是基于 Java 1.6 实现的 JSR 269: Pluggable Annotation Processing API 来实现的，也就是通过编译期自定义注解处理器来实现的，它的执行步骤如下：</p> <p><img src="F:%5CTyper%E7%AC%94%E8%AE%B0%5C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%5C%E9%9D%A2%E8%AF%95%E9%A2%98%5CCgq2xl6HCB-AAsAKAACfTHorgDA111.png" alt="img"></p> <p>从流程图中可以看出，在编译期阶段，当 Java 源码被抽象成语法树（AST）之后，Lombok 会根据自己的注解处理器动态修改 AST，增加新的代码（节点），在这一切执行之后就生成了最终的字节码（.class）文件，这就是 Lombok 的执行原理。</p> <p>3.动态代理知识点扩充
+当面试官问动态代理的时候，经常会问到它和静态代理的区别？静态代理其实就是事先写好代理类，可以手工编写也可以使用工具生成，但它的缺点是每个业务类都要对应一个代理类，特别不灵活也不方便，于是就有了动态代理。</p> <p>动态代理的常见使用场景有 RPC 框架的封装、AOP（面向切面编程）的实现、JDBC 的连接等。</p> <p>Spring 框架中同时使用了两种动态代理 JDK Proxy 和 CGLib，当 Bean 实现了接口时，Spring 就会使用 JDK Proxy，在没有实现接口时就会使用 CGLib，我们也可以在配置中指定强制使用 CGLib，只需要在 Spring 配置中添加 &lt;aop:aspectj-autoproxy proxy-target-class=&quot;true&quot;/&gt; 即可。小结
+本课时我们介绍了 JDK Proxy 和 CGLib 的区别，JDK Proxy 是 Java 语言内置的动态代理，必须要通过实现接口的方式来代理相关的类，而 CGLib 是第三方提供的基于 ASM 的高效动态代理类，它通过实现被代理类的子类来实现动态代理的功能，因此被代理的类不能使用 final 修饰。</p> <p>除了 JDK Proxy 和 CGLib 之外，我们还讲了 Java 中常用的工具类 Lombok 的实现原理，它其实和反射是没有任何关系的；最后讲了动态代理的使用场景以及 Spring 中动态代理的实现方式，希望本文可以帮助到你。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/FAQ/Docker.html" class="prev">
+        Docker 是什么？它有什么优点？
+      </a></span> <span class="next"><a href="/FAQ/MQ.html">
+        MQ的使用场景
+      </a>
+      →
+    </span></p></div> </main></div> <!----></main><div class="global-ui"><div></div><div id="live2d-widget" class="live2d-widget-container" style="position:fixed;right:65px;bottom:0px;width:135px;height:300px;z-index:99999;opacity:0.8;pointer-events:none;"><canvas id="live2d_canvas" width="135" height="300" class="live2d_canvas" style="position:absolute;left:0px;top:0px;width:135px;height:300px;"></canvas></div></div></div>
+    <script src="/assets/js/app.61c80fcc.js" defer></script><script src="/assets/js/2.10aa6be6.js" defer></script><script src="/assets/js/10.9496497a.js" defer></script>
+  </body>
+</html>
